@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import { QueryClient,QueryClientProvider } from "react-query";
+import Navbar from "./components/Navbar";
+import Collection from './components/Collection';
+
+const queryClient = new QueryClient()
 
 function App() {
+  const [page, setPage] = useState('');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <QueryClientProvider client= {queryClient}>
+      <div className="App">
+      <h1>infos</h1>
+      <Navbar setPage= {setPage}/>
+      <div className="content">
+        {page === 'collection' ? <Collection /> : " "}
+      </div>
     </div>
+    </QueryClientProvider>
+    
   );
 }
 
